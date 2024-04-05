@@ -31,7 +31,6 @@ export function run(input) {
     },
     []
   );
-
   return operations.length > 0 ? { operations } : NO_CHANGES;
 }
 
@@ -44,7 +43,7 @@ function optionallyBuildUpdateOperation({
   merchandise,
 }) {
   // OR statement to hardcode locationId for testing purposes
-  const location = locationId || 95019991343;
+  const location = locationId || 95002984751;
   // Even though locationPrices metafield is specified as JSON in Shopify, it is returned as a string
   // so we need to parse it to JSON
   const locationPrices = JSON.parse(merchandise?.locationPrices?.value) || null;
@@ -64,11 +63,11 @@ function optionallyBuildUpdateOperation({
     return {
       cartLineId,
       price: {
-          adjustment: {
-            fixedPricePerUnit: {
-                amount: Number(newPrice).toFixed(2),
-            },
+        adjustment: {
+          fixedPricePerUnit: {
+            amount: Number(newPrice).toFixed(2),
           },
+        },
       },
     };
   }
@@ -77,10 +76,22 @@ function optionallyBuildUpdateOperation({
 }
 
 function findLocationPrice(locationID, locationPrices) {
-  for (const locationPrice of locationPrices.locations) {
+  // Use reduce to iterate over the locationPrices
+  const newPrice = locationPrices.locations.reduce((acc, locationPrice) => {
+    // If the locationID matches the locationID on the cart line, return the price
     if (locationPrice.locationID == locationID) {
-      //console.log(`Location Matched: ${locationPrice.locationID}`);
       return locationPrice.price;
     }
-  }
+    return acc;
+  }, []);
+  return newPrice;
 }
+
+// function findLocationPrice(locationID, locationPrices) {
+//   for (const locationPrice of locationPrices.locations) {
+//     if (locationPrice.locationID == locationID) {
+//       //console.log(`Location Matched: ${locationPrice.locationID}`);
+//       return locationPrice.price;
+//     }
+//   }
+// }
