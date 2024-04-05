@@ -2,7 +2,25 @@ query RunInput {
   cart {
     lines {
       id
-      quantity
+      cost {
+        amountPerQuantity {
+          amount
+          currencyCode
+        }
+      }
+      merchandise {
+        ... on ProductVariant {
+          id
+          title
+          locationPrice: metafield(namespace: "custom", key: "location_price") {
+            value
+          }
+          product {
+            id
+            title
+          }
+        }
+      }
     }
   }
 }
