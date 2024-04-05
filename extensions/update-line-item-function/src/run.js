@@ -86,12 +86,3 @@ function findLocationPrice(locationID, locationPrices) {
   }, []);
   return newPrice;
 }
-
-// function findLocationPrice(locationID, locationPrices) {
-//   for (const locationPrice of locationPrices.locations) {
-//     if (locationPrice.locationID == locationID) {
-//       //console.log(`Location Matched: ${locationPrice.locationID}`);
-//       return locationPrice.price;
-//     }
-//   }
-// }
