@@ -8,16 +8,16 @@ query RunInput {
           currencyCode
         }
       }
+      locationId: attribute(key: "Location ID") {
+        value
+      }
       merchandise {
+        __typename
         ... on ProductVariant {
           id
           title
-          locationPrice: metafield(namespace: "custom", key: "location_price") {
+          locationPrices: metafield(namespace: "custom", key: "location_price") {
             value
-          }
-          product {
-            id
-            title
           }
         }
       }
