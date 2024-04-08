@@ -78,6 +78,6 @@ function findLocationPrice(locationID, locationPrices) {
   // Use reduce to iterate over the locationPrices
   const newPrice = locationPrices.locations.reduce((price, locationPrice) => {
     // If the locationID matches the locationID on the cart line, return the price
-    return (locationPrice.locationID == locationID) ? locationPrice.price : price;}, []);
+    return (locationPrice.locationID == locationID) ? locationPrice.price : price}, []);
   return newPrice;
 }
