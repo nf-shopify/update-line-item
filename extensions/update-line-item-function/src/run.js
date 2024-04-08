@@ -71,7 +71,6 @@ function optionallyBuildUpdateOperation({
       },
     };
   }
-
   return null;
 }
 
