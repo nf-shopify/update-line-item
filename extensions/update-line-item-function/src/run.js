@@ -77,12 +77,8 @@ function optionallyBuildUpdateOperation({
 
 function findLocationPrice(locationID, locationPrices) {
   // Use reduce to iterate over the locationPrices
-  const newPrice = locationPrices.locations.reduce((acc, locationPrice) => {
+  const newPrice = locationPrices.locations.reduce((price, locationPrice) => {
     // If the locationID matches the locationID on the cart line, return the price
-    if (locationPrice.locationID == locationID) {
-      return locationPrice.price;
-    }
-    return acc;
-  }, []);
+    return (locationPrice.locationID == locationID) ? locationPrice.price : price;}, []);
   return newPrice;
 }
