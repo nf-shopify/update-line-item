@@ -44,20 +44,24 @@ function optionallyBuildUpdateOperation({
 }) {
   // OR statement to hardcode locationId for testing purposes
   const location = locationId || 95002984751;
-  // Even though locationPrices metafield is specified as JSON in Shopify, it is returned as a string
-  // so we need to parse it to JSON
-  const locationPrices = JSON.parse(merchandise?.locationPrices?.value) || null;
-  if (!locationPrices) {
+  console.log(`Location ID: ${location}`);
+
+  // Check if the merchandise has locationPrices metafield populated
+  if (!merchandise?.locationPrices?.value) {
     return null;
+  } else {
+    // Even though locationPrices metafield is specified as JSON in Shopify, it is returned as a string
+    // so we need to parse it to JSON
+    const locationPrices = JSON.parse(merchandise?.locationPrices?.value);
   }
 
   // Find the price for the location specficed on the cart line
   const newPrice = findLocationPrice(location, locationPrices);
-  //console.log(`Location ID: ${location}, Updated Price: ${newPrice}`);
+  console.log(`Location ID: ${location}, Updated Price: ${newPrice}`);
 
   // Check if the location and price are valid
   const haslocationPrice = location && Number(newPrice) > 0;
-  //console.log(`Location ID: ${haslocationPrice}`);
+  console.log(`Location ID: ${haslocationPrice}`);
 
   if (merchandise.__typename === "ProductVariant" && haslocationPrice) {
     return {
@@ -78,6 +82,7 @@ function findLocationPrice(locationID, locationPrices) {
   // Use reduce to iterate over the locationPrices
   const newPrice = locationPrices.locations.reduce((price, locationPrice) => {
     // If the locationID matches the locationID on the cart line, return the price
-    return (locationPrice.locationID == locationID) ? locationPrice.price : price}, []);
+    return locationPrice.locationID == locationID ? locationPrice.price : price;
+  }, []);
   return newPrice;
 }
