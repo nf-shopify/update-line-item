@@ -52,7 +52,6 @@ function optionallyBuildUpdateOperation({
   }
   const locationPrices = JSON.parse(merchandise?.locationPrices?.value);
 
-
   // Find the price for the location specficed on the cart line
   const newPrice = findLocationPrice(location, locationPrices);
   //console.log(`Location ID: ${location}, Updated Price: ${newPrice}`);
@@ -78,9 +77,8 @@ function optionallyBuildUpdateOperation({
 
 function findLocationPrice(locationID, locationPrices) {
   // Use reduce to iterate over the locationPrices
-  const newPrice = locationPrices.locations.reduce((price, locationPrice) => {
+  return locationPrices.locations.reduce((price, locationPrice) => {
     // If the locationID matches the locationID on the cart line, return the price
     return locationPrice.locationID == locationID ? locationPrice.price : price;
   }, []);
-  return newPrice;
 }
