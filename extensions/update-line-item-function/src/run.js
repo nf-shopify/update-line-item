@@ -49,15 +49,13 @@ function optionallyBuildUpdateOperation({
   // Check if the merchandise has locationPrices metafield populated
   if (!merchandise?.locationPrices?.value) {
     return null;
-  } else {
-    // Even though locationPrices metafield is specified as JSON in Shopify, it is returned as a string
-    // so we need to parse it to JSON
-    const locationPrices = JSON.parse(merchandise?.locationPrices?.value);
   }
+  const locationPrices = JSON.parse(merchandise?.locationPrices?.value);
+
 
   // Find the price for the location specficed on the cart line
   const newPrice = findLocationPrice(location, locationPrices);
-  console.log(`Location ID: ${location}, Updated Price: ${newPrice}`);
+  //console.log(`Location ID: ${location}, Updated Price: ${newPrice}`);
 
   // Check if the location and price are valid
   const haslocationPrice = location && Number(newPrice) > 0;
