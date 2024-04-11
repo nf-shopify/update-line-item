@@ -50,6 +50,9 @@ function optionallyBuildUpdateOperation({
   if (!merchandise?.locationPrices?.value) {
     return null;
   }
+
+  // Even though locationPrices metafield is specified as JSON in Shopify, it is returned as a string
+  // so we need to parse it to JSON
   const locationPrices = JSON.parse(merchandise?.locationPrices?.value);
 
   // Find the price for the location specficed on the cart line
