@@ -14,13 +14,13 @@ It contains the basics for building a Shopify app that uses only app extensions.
 
 ### Clone the project
 ```
-git clone https://github.com/nf-shopify/bulk-pricing.git
+git clone https://github.com/nf-shopify/update-line-item.git
 ```
-You can find function within /extensions/bulk-pricing-function
+You can find function within extensions/update-line-item-function
 
 ### Prerequisites
 
-1. Creation of a json metafield on the varirant object to contain minimum quantity - namespace: "custom", key: "bulk_prices"
+1. Creation of a json metafield on the varirant object to contain location based pricing - namespace: "custom", key: "location_price"
 ```
 {
   "locations": [
