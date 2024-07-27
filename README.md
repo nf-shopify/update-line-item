@@ -1,4 +1,4 @@
-# Shopify App Template - Location Based Pricing Cart Transform Function (app with extensions only)
+# Shopify Function Template - Location Based Pricing Cart Transform Function (app with extensions only)
 
 This is a template for building a Cart Transform Function that applies dynamic location x line item pricing based on cart attribute containg the location ID. This app does not include an app home UI.
 
